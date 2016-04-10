@@ -1,0 +1,18 @@
+DGS004
+null 0 0
+
+an C1
+an C2
+an C3
+an C4
+an C5
+an C6
+
+ae e1 C1 C2 weight:2
+ae e2 C1 C5 weight:2
+ae e3 C1 C6 weight:4
+ae e4 C2 C3 weight:1
+ae e5 C3 C4 weight:1
+ae e6 C3 C5 weight:3
+ae e7 C4 C6 weight:1
+ae e8 C5 C6 weight:1
