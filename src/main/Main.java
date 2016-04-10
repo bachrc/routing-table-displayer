@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 
 /**
@@ -93,6 +94,10 @@ public class Main extends JFrame {
 			this.afficherTable.setEnabled(true);
 			this.afficherGraphe.setEnabled(true);
 			this.status.setText("Chargé : " + fichierCharge.getName());
+			this.listNodes.removeAllItems();
+			for(Node n : graph.getNodeSet()) {
+				this.listNodes.addItem(n.getId());
+			}
 		}
 	}
 
@@ -119,10 +124,11 @@ public class Main extends JFrame {
 				try {
 					graph.read(chooser.getSelectedFile().getAbsolutePath());
 					fichierCharge = chooser.getSelectedFile();
-					refreshComps();
 				} catch (Exception e) {
+					fichierCharge = null;
 					JOptionPane.showMessageDialog(null, "Le fichier ne correspond pas à la syntaxe de GraphStream", "Fichier invalide", JOptionPane.ERROR_MESSAGE);
 				}
+				refreshComps();
 			}
 		}
 
