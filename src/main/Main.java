@@ -12,10 +12,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -26,7 +26,7 @@ import org.graphstream.graph.implementations.SingleGraph;
  */
 public class Main extends JFrame {
 
-	private Graph graph;
+	private final Graph graph;
 	private File fichierCharge;
 	private JLabel status;
 	private JComboBox listNodes;
@@ -35,6 +35,7 @@ public class Main extends JFrame {
 
 	public Main() {
 		this.graph = new SingleGraph("GraphRoutage");
+		
 		this.setupUI();
 	}
 
@@ -48,7 +49,7 @@ public class Main extends JFrame {
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		gbc.insets = new Insets(5, 3, 5, 3);
-		this.add(new JLabel("<html><big>Routing Tables Generator</big></html>"), gbc);
+		this.add(new JLabel("<html><big>Routing Tables Displayer</big></html>"), gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -109,6 +110,16 @@ public class Main extends JFrame {
 			}
 		}
 	}
+	
+	public void refreshViewer() {
+		this.graph.addAttribute("ui.stylesheet", "url('src/main/style.css')");
+		for(Node n:this.graph) 
+			n.addAttribute("ui.label", n.getId());
+		
+		for(Edge e:this.graph.getEachEdge()) 
+			e.addAttribute("ui.label", e.getAttribute("weight"));
+		
+	}
 
 	public static void main(String[] args) {
 		try {
@@ -138,6 +149,7 @@ public class Main extends JFrame {
 					JOptionPane.showMessageDialog(null, "Le fichier ne correspond pas à la syntaxe de GraphStream", "Fichier invalide", JOptionPane.ERROR_MESSAGE);
 				}
 				refreshComps();
+				refreshViewer();
 			}
 		}
 
