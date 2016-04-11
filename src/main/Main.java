@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,7 +30,8 @@ public class Main extends JFrame {
 	private File fichierCharge;
 	private JLabel status;
 	private JComboBox listNodes;
-	protected JButton afficherTable, afficherGraphe, charger; 
+	protected JButton afficherTable, afficherGraphe, charger;
+	private Table table;
 
 	public Main() {
 		this.graph = new SingleGraph("GraphRoutage");
@@ -78,6 +80,13 @@ public class Main extends JFrame {
 		this.afficherTable = new JButton(new DisplayTableButton());
 		this.afficherTable.setEnabled(false);
 		this.add(this.afficherTable, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.table = new Table();
+		this.add(this.table, gbc);
 
 		pack();
 		this.setLocation(420, 200);
@@ -156,7 +165,8 @@ public class Main extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			try {
-				Table t = new Table((String)listNodes.getSelectedItem(), graph);
+				table.refreshTable((String)listNodes.getSelectedItem(), graph);
+				pack();
 			} catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Erreur lors de l'établissement de la table de routage.", "Etablissement impossible", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();

@@ -5,9 +5,14 @@
  */
 package main;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.Edge;
@@ -19,8 +24,27 @@ import org.graphstream.graph.Node;
  * @author totorolepacha
  */
 public class Table extends JPanel {
-	public Table(String node, Graph graph) {
-		System.out.println("Bonjour");
+	HashMap<Node,Node[]> routage;
+	
+	public Table() {
+		this.setBorder(BorderFactory.createTitledBorder("Table de routage"));
+	}
+	
+	public void refreshTable(String node, Graph graph) throws Exception {
+		this.removeAll();
+		this.routage = routage(node, graph);
+		setLayout(new GridLayout(this.routage.size(), this.routage.get((Node)this.routage.keySet().toArray()[0]).length));
+		for(Node noeud:this.routage.keySet()) {
+			this.add(new JLabel(noeud.getId()));
+			for(Node temp:this.routage.get(noeud)) {
+				this.add(new JLabel(temp.getId()));
+			}
+		}
+	}
+	
+	public static HashMap<Node, Node[]> routage(String node, Graph graph) throws Exception {
+		HashMap<Node, Node[]> retour = new HashMap<>();
+		
 		final Node depart = graph.getNode(node);
 		ArrayList<Node> voisins = new ArrayList<>();
 		
@@ -42,6 +66,9 @@ public class Table extends JPanel {
 				
 			System.out.println("Pour le noeud " + dest.getId() + " : " + voisins.toString());
 			
+			retour.put(dest, Arrays.copyOf(voisins.toArray(), voisins.size(), Node[].class));
 		}
-	}	
+		
+		return retour;
+	}
 }
