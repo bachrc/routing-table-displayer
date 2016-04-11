@@ -44,7 +44,7 @@ public class Table extends JPanel {
 		});
 		
 		for(Node noeud:noeuds) {
-			this.add(new JLabel(noeud.getId()));
+			this.add(new JLabel("<html><b>" + noeud.getId() + "</b></html>"));
 			for(Node temp:this.routage.get(noeud)) {
 				this.add(new JLabel(temp.getId()));
 			}
