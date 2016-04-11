@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +35,15 @@ public class Table extends JPanel {
 		this.removeAll();
 		this.routage = routage(node, graph);
 		setLayout(new GridLayout(this.routage.size(), this.routage.get((Node)this.routage.keySet().toArray()[0]).length));
-		for(Node noeud:this.routage.keySet()) {
+		
+		List<Node> noeuds = new ArrayList<>(this.routage.keySet());
+		Collections.sort(noeuds, new Comparator<Node>(){
+			public int compare(Node n1, Node n2) {
+				return n1.getId().compareTo(n2.getId());
+			}
+		});
+		
+		for(Node noeud:noeuds) {
 			this.add(new JLabel(noeud.getId()));
 			for(Node temp:this.routage.get(noeud)) {
 				this.add(new JLabel(temp.getId()));
