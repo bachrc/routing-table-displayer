@@ -155,7 +155,12 @@ public class Main extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+			try {
+				Table t = new Table((String)listNodes.getSelectedItem(), graph);
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Erreur lors de l'établissement de la table de routage.", "Etablissement impossible", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
 		}
 
 	}
