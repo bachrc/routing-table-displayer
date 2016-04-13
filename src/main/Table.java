@@ -73,8 +73,6 @@ public class Table extends JPanel {
 				}
 			});
 				
-			System.out.println("Pour le noeud " + dest.getId() + " : " + voisins.toString());
-			
 			retour.put(dest, Arrays.copyOf(voisins.toArray(), voisins.size(), Node[].class));
 		}
 		

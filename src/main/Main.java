@@ -181,7 +181,6 @@ public class Main extends JFrame {
 				pack();
 			} catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Erreur lors de l'établissement de la table de routage.", "Etablissement impossible", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
 			}
 		}
 
