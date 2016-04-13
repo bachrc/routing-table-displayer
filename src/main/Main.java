@@ -39,6 +39,9 @@ public class Main extends JFrame {
 		this.setupUI();
 	}
 
+	/**
+	 * Méthode se chargeant de mettre en forme le panel.
+	 */
 	public final void setupUI() {
 		this.setTitle("Routing Table Generator");
 		this.setLayout(new GridBagLayout());
@@ -95,6 +98,10 @@ public class Main extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Cette méthode se charge de griser les boutons si aucun fichier n'est chargé,
+	 * et de les rendre actifs s'ils y en a un.
+	 */
 	public void refreshComps() {
 		if(fichierCharge == null) {
 			this.afficherTable.setEnabled(false);
@@ -111,6 +118,10 @@ public class Main extends JFrame {
 		}
 	}
 	
+	/**
+	 * Cette méthode sert ici à afficher les noms des noeuds et les 
+	 * poids sur le graphe.
+	 */
 	public void refreshViewer() {
 		this.graph.addAttribute("ui.stylesheet", "url('src/main/style.css')");
 		for(Node n:this.graph) 
@@ -121,6 +132,11 @@ public class Main extends JFrame {
 		
 	}
 
+	/**
+	 * Méthode principale essayant de faire appel au look&feel par défaut du
+	 * système.
+	 * @param args 
+	 */
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -129,7 +145,10 @@ public class Main extends JFrame {
 		}
 		new Main();
 	}
-
+	
+	/**
+	 * Action se chargeant du bouton de chargement
+	 */
 	public class LoadButton extends AbstractAction {
 
 		public LoadButton() {
@@ -155,6 +174,9 @@ public class Main extends JFrame {
 
 	}
 
+	/**
+	 * Action se chargeant du bouton pour afficher le graphe
+	 */
 	public class DisplayGraphButton extends AbstractAction {
 
 		public DisplayGraphButton() {
@@ -168,6 +190,9 @@ public class Main extends JFrame {
 
 	}
 
+	/**
+	 * Action se chargeant du bouton d'affichage de la table de routage.
+	 */
 	public class DisplayTableButton extends AbstractAction {
 
 		public DisplayTableButton() {

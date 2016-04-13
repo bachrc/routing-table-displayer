@@ -31,6 +31,12 @@ public class Table extends JPanel {
 		this.setBorder(BorderFactory.createTitledBorder("Table de routage"));
 	}
 	
+	/**
+	 * Méthode affichant en son sein le contenu de la table de routage.
+	 * @param node L'identifiant du noeud source à la table de routage
+	 * @param graph Le graphe représentant le réseau en cours
+	 * @throws Exception 
+	 */
 	public void refreshTable(String node, Graph graph) throws Exception {
 		this.removeAll();
 		this.routage = routage(node, graph);
@@ -51,6 +57,13 @@ public class Table extends JPanel {
 		}
 	}
 	
+	/**
+	 * Méthode renvoyant la Hashmap contenant les ordres de routage.
+	 * @param node L'identifiant du noeud source à la table de routage
+	 * @param graph Le graphe représentant le réseau en cours
+	 * @return La Hashmap contenant les informations relatives à la table de routage
+	 * @throws Exception 
+	 */
 	public static HashMap<Node, Node[]> routage(String node, Graph graph) throws Exception {
 		HashMap<Node, Node[]> retour = new HashMap<>();
 		
